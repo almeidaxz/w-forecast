@@ -16,7 +16,7 @@
     left: -10px;
     right: 0;
     bottom: -1px;
-    background-color: #ccc;
+    background-color: rgba(255, 187, 0, 0.883);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -53,4 +53,16 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.celc {
+    padding: 0 0 0 3.5px;
+}
+
+.fahr {
+    padding: 0 0 0 15px;
+}
+
+.normal-slider {
+    background-color: #CCC;
 }
