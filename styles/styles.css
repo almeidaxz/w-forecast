@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+
 body{
     position: relative;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #bg {
@@ -11,4 +14,16 @@ body{
     right: 0;
     bottom: 0;
     z-index: -1;
+}
+
+.logo{
+    width: 35px;
+}
+
+.nav-bar {
+    height: 60px;
+    padding: 0 1.2rem;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.79);
+    border-bottom: 0.2rem solid aliceblue;
 }

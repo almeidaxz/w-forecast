@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/styles.css">
     <link rel="stylesheet" href="../../styles/resets.css">
+    <link rel="stylesheet" href="../../styles/utils.css">
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/switch.css">
     <title>WForecast</title>
 </head>
+
 <body>
     <header>
-        <nav>
-            <div>WForecast</div>
-            <div>Menu</div>
+        <nav class="nav-bar row space-btw align-center">
+            <a href="#" class="row align-center gap-5">
+                <img class="logo" src="../../assets/logo.png" alt="logo">
+                <h1>WForecast</h1>
+            </a>
+            <div class="column gap-3">
+                <div class="row align-center space-btw width-300">
+                    <span>Allow Location</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="row align-center space-btw width-300">
+                    <span>Temperature Metric</span>
+                    <label class="switch data-on='C°' data-off='°F'">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
         </nav>
     </header>
     <main>
-        <img id="bg" src="../../assets/sunny.gif" />
+        <!-- <img id="bg" src="../../assets/sunny.gif" /> -->
         <div>
             <input type="text" placeholder="City name">
             <button>Get Weather</button>
         </div>
     </main>
 </body>
+
 </html>

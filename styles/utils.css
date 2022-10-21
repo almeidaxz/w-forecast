@@ -1,0 +1,36 @@
+.row {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-btw {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.gap-3 {
+    gap: 0.3rem;
+}
+
+.gap-5 {
+    gap: 0.5rem;
+}
+
+.gap-15 {
+    gap: 1.5rem;
+}
+
+.width-300{
+    width: 15rem;
+}
