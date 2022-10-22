@@ -1,28 +1,28 @@
 import { changeToCelc, changeToFahr } from "../scripts/utils/utils.js";
 import geolocationUrl from '../scripts/services/geolocation.js';
-import secret from "../secret.js";
+import weather from "./services/weather.js";
+import { googleKey, weatherKey } from "../secret.js";
 
-const locationState = document.querySelector('#location-state');
 const metricState = document.querySelector('#metric-state');
 const selectedMetric = document.querySelector('#selected-metric');
 
+let latitude, longitude;
+
 const handleBrowserGeolocation = () => {
     window.navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
+        const { latitude: lat, longitude: long } = position.coords;
+        latitude = lat;
+        longitude = long;
 
-        const response = await fetch(`${geolocationUrl}${latitude},${longitude}&key=${secret}`);
+        const response = await fetch(`${geolocationUrl}${lat},${long}&key=${googleKey}`);
         const address = await response.json();
 
-        if(address.plus_code.compound_code.includes('USA') || address.plus_code.compound_code.includes('US')) {
+        if (address.plus_code.compound_code.includes('USA') || address.plus_code.compound_code.includes('US')) {
             changeToFahr(selectedMetric);
             metricState.checked = false;
-        } else {
-            console.log('não tem');
         }
-    }, (err) => {
-        if(err.code === 1) {
-            locationState.checked = false;
-        }
+
+        getCurrentWeather();
     });
 }
 handleBrowserGeolocation();
@@ -36,3 +36,11 @@ metricState.addEventListener('click', (e) => {
         changeToCelc(selectedMetric);
     }
 });
+
+if (latitude && longitude) {
+}
+const getCurrentWeather = async () => {
+    const response = await fetch(`${weather}lat=${latitude}&lon=${longitude}&appid=${weatherKey}`);
+    const teste = await response.json();
+    console.log(teste);
+}
