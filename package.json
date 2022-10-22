@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/almeidaxz/w-forecast/issues"
   },
-  "homepage": "https://github.com/almeidaxz/w-forecast#readme"
+  "homepage": "https://github.com/almeidaxz/w-forecast#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
 }
