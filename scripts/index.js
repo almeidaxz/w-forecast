@@ -2,7 +2,8 @@ import { changeToCelc, changeToFahr } from "../scripts/utils/utils.js";
 import geolocationUrl from '../scripts/services/geolocation.js';
 import secret from "../secret.js";
 
-const toggleState = document.querySelector('#toggle-state');
+const locationState = document.querySelector('#location-state');
+const metricState = document.querySelector('#metric-state');
 const selectedMetric = document.querySelector('#selected-metric');
 
 const handleBrowserGeolocation = () => {
@@ -14,15 +15,19 @@ const handleBrowserGeolocation = () => {
 
         if(address.plus_code.compound_code.includes('USA') || address.plus_code.compound_code.includes('US')) {
             changeToFahr(selectedMetric);
-            toggleState.checked = false;
+            metricState.checked = false;
         } else {
             console.log('não tem');
+        }
+    }, (err) => {
+        if(err.code === 1) {
+            locationState.checked = false;
         }
     });
 }
 handleBrowserGeolocation();
 
-toggleState.addEventListener('click', (e) => {
+metricState.addEventListener('click', (e) => {
     if (!e.target.checked) {
         changeToFahr(selectedMetric);
     }
