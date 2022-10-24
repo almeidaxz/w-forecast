@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../../assets/logo.png">
     <link rel="stylesheet" href="../../styles/utils.css">
     <link rel="stylesheet" href="../../styles/switch.css">
     <link rel="stylesheet" href="../../styles/resets.css">
     <link rel="stylesheet" href="./styles.css">
     <script type="module" src="../../scripts/index.js" defer></script>
     <script type="module" src="../../scripts/utils/utils.js" defer></script>
-    <script type="module" src="../../scripts/services/geolocation.js" defer></script>
+    <script type="module" src="../../scripts/services/APIs/geolocationUrl.js" defer></script>
     <script type="module" src="../../secret.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
     <title>WForecast</title>
@@ -25,8 +26,8 @@
                 <h1>WForecast</h1>
             </a>
             <div class="column gap-3">
-                <div class="row align-center space-btw width-300">
-                    <span>Temperature Metric</span>
+                <div class="row align-center space-btw width-110">
+                    <span>Temperature</span>
                     <label class="switch">
                         <input id="metric-state" type="checkbox" checked>
                         <span id="selected-metric" class="slider round celc">°C</span>
@@ -46,7 +47,7 @@
                 <button>Get Weather</button>
             </div>
         </div>
-        <div id="weather-content-wrapper" class="row gap-8">
+        <div id="weather-content-wrapper" class="row gap-24 justify-center">
 
         </div>
     </main>

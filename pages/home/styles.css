@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
-body{
+body {
     position: relative;
     font-family: 'Montserrat', sans-serif;
 }
@@ -16,7 +16,7 @@ body{
     z-index: -1;
 }
 
-.logo{
+.logo {
     width: 35px;
 }
 
@@ -28,43 +28,61 @@ body{
     border-bottom: 0.2rem solid aliceblue;
 }
 
-.input-wrapper{
+.input-wrapper {
     margin-top: 4.5rem;
 }
 
-#location-input{
+#location-input {
     width: 25rem;
 }
 
-.content-wrapper{
+.content-wrapper {
     position: relative;
 }
 
-.options-wrapper{
+.options-wrapper {
     width: 25rem;
     background-color: aliceblue;
     position: absolute;
     top: 2rem;
 }
 
-.option{
+.option {
     font-size: 1.5rem;
     cursor: pointer;
     opacity: 0.7;
 }
 
-.option:hover{
+.option:hover {
     opacity: 1;
 }
 
-#weather-content-wrapper{
+#weather-content-wrapper {
     margin-top: 5rem;
 }
 
-.day-weather {
-    height: 30rem;
-    width: 60rem;
+.todays-weather {
+    height: 60rem;
+    width: 40rem;
     background-color: aliceblue;
+}
+
+.daily-weather {
+    height: 40rem;
+    width: 30rem;
+    background-color: aliceblue;
+}
+
+.todays-temperature {
+    font-size: 3.6rem;
+}
+
+.todays-weekday {
+    font-size: 2.2rem;
+}
+
+.todays-condition {
+    font-size: 1.4rem;
 }
 
 .hidden {

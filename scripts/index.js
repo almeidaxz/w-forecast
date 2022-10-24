@@ -1,57 +1,24 @@
-import { changeToCelc, changeToFahr, formatToCelc, formatDayNumberToString } from "../scripts/utils/utils.js";
-import { geolocationByCoods, geolocationByAddress } from '../scripts/services/geolocation.js';
-import weather from "./services/weather.js";
-import { googleKey, weatherKey } from "../secret.js";
+import { changeToCelc, changeToFahr } from "../scripts/utils/utils.js";
+import { googleKey } from "../secret.js";
+import { geolocationByAddress } from './services/APIs/geolocationUrl.js';
+import { handleGeolocationFetch } from "./services/handleGeolocationFetch.js";
 
 const metricState = document.querySelector('#metric-state');
 const selectedMetric = document.querySelector('#selected-metric');
 const locationInput = document.querySelector('#location-input');
 const optionsWrapper = document.querySelector('.options-wrapper');
-const weatherContentWrapper = document.querySelector('#weather-content-wrapper');
 
 let latitude, longitude;
 
-const getCurrentWeather = async () => {
-    const response = await fetch(`${weather}/${latitude},${longitude}/next5days?key=${weatherKey}`);
-    const weathers = await response.json();
-    console.log(weathers);
-
-    if(!weathers.days.length) return;
-
-    weathers.days.map((day) => {
-        const dailyWeatherWrapper = document.createElement('div');
-        dailyWeatherWrapper.classList.add('day-weather', 'column', 'align-center', 'space-btw');
-
-        const dayAndTemperatureWrapper = document.createElement('div');
-        dayAndTemperatureWrapper.classList.add('column-reverse', 'align-center');
-
-        const dailyTemperature = document.createElement('h2');
-        dailyTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;c</sup>`;
-
-        const currentDay = document.createElement('h4');
-        currentDay.textContent = formatDayNumberToString(day.datetime);
-
-        const conditions = document.createElement('span');
-        conditions.textContent = day.conditions;
-
-
-        dayAndTemperatureWrapper.append(conditions);
-        dayAndTemperatureWrapper.append(currentDay);
-        dayAndTemperatureWrapper.append(dailyTemperature);
-
-        dailyWeatherWrapper.append(dayAndTemperatureWrapper)
-        weatherContentWrapper.append(dailyWeatherWrapper);
-    });
-}
-
-(() => {
+(async () => {
     const localLat = localStorage.getItem('latitude');
     const localLong = localStorage.getItem('longitude');
 
-    if(localLat && localLong) {
+    if (localLat && localLong) {
         latitude = localLat;
         longitude = localLong;
-        getCurrentWeather();
+
+        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState);
         return;
     }
 
@@ -62,26 +29,17 @@ const getCurrentWeather = async () => {
         localStorage.setItem('latitude', lat);
         localStorage.setItem('longitude', long);
 
-        const response = await fetch(`${geolocationByCoods}${lat},${long}&key=${googleKey}`);
-        const address = await response.json();
-
-        if (address.plus_code.compound_code.includes('USA') || address.plus_code.compound_code.includes('US')) {
-            changeToFahr(selectedMetric);
-            metricState.checked = false;
-        }
-
-        getCurrentWeather();
+        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState);
     });
 })();
 
 metricState.addEventListener('click', (e) => {
     if (!e.target.checked) {
         changeToFahr(selectedMetric);
+        return;
     }
 
-    if (e.target.checked) {
-        changeToCelc(selectedMetric);
-    }
+    changeToCelc(selectedMetric);
 });
 
 const getAddress = async (e) => {

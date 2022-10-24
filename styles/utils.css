@@ -44,6 +44,10 @@
     gap: 1.5rem;
 }
 
-.width-300{
-    width: 15rem;
+.gap-24 {
+    gap: 2.4rem;
+}
+
+.width-110{
+    width: 11rem;
 }
