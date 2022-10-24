@@ -24,3 +24,7 @@ export const formatDayNumberToString = (date) => {
 
     return weekDays[weekDay];
 }
+
+export const formatMilesToKMh = (valueInMiles) => {
+    return (valueInMiles * 1.6).toFixed(0);
+}

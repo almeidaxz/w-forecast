@@ -67,22 +67,34 @@ body {
     background-color: aliceblue;
 }
 
+.todays-weather sup {
+    font-size: 2rem;
+}
+
+.todays-temperature {
+    font-size: 4.2rem;
+}
+
+.todays-weekday {
+    font-size: 2.4rem;
+}
+
+.todays-condition {
+    font-size: 1.6rem;
+}
+
 .daily-weather {
     height: 40rem;
     width: 30rem;
     background-color: aliceblue;
 }
 
-.todays-temperature {
-    font-size: 3.6rem;
-}
-
-.todays-weekday {
-    font-size: 2.2rem;
-}
-
-.todays-condition {
+.daily-weather sup {
     font-size: 1.4rem;
+}
+
+.daily-weather h1 {
+    font-size: 2.8rem;
 }
 
 .hidden {
