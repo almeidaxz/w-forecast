@@ -1,4 +1,4 @@
-import { changeToCelc, changeToFahr } from "../scripts/utils/utils.js";
+import { changeToCelc, changeToFahr, formatToCelc, formatDayNumberToString } from "../scripts/utils/utils.js";
 import { geolocationByCoods, geolocationByAddress } from '../scripts/services/geolocation.js';
 import weather from "./services/weather.js";
 import { googleKey, weatherKey } from "../secret.js";
@@ -19,11 +19,28 @@ const getCurrentWeather = async () => {
     if(!weathers.days.length) return;
 
     weathers.days.map((day) => {
-        console.log(day);
-        const dayWeather = document.createElement('div');
-        dayWeather.textContent = day.temp;
-        dayWeather.classList.add('day-weather');
-        weatherContentWrapper.append(dayWeather);
+        const dailyWeatherWrapper = document.createElement('div');
+        dailyWeatherWrapper.classList.add('day-weather', 'column', 'align-center', 'space-btw');
+
+        const dayAndTemperatureWrapper = document.createElement('div');
+        dayAndTemperatureWrapper.classList.add('column-reverse', 'align-center');
+
+        const dailyTemperature = document.createElement('h2');
+        dailyTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;c</sup>`;
+
+        const currentDay = document.createElement('h4');
+        currentDay.textContent = formatDayNumberToString(day.datetime);
+
+        const conditions = document.createElement('span');
+        conditions.textContent = day.conditions;
+
+
+        dayAndTemperatureWrapper.append(conditions);
+        dayAndTemperatureWrapper.append(currentDay);
+        dayAndTemperatureWrapper.append(dailyTemperature);
+
+        dailyWeatherWrapper.append(dayAndTemperatureWrapper)
+        weatherContentWrapper.append(dailyWeatherWrapper);
     });
 }
 

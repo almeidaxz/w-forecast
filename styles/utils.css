@@ -7,6 +7,11 @@
     flex-direction: column;
 }
 
+.column-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .justify-center {
     justify-content: center;
 }
