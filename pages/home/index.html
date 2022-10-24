@@ -13,6 +13,7 @@
     <script type="module" src="../../scripts/utils/utils.js" defer></script>
     <script type="module" src="../../scripts/services/geolocation.js" defer></script>
     <script type="module" src="../../secret.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
     <title>WForecast</title>
 </head>
 
@@ -36,9 +37,14 @@
     </header>
     <main>
         <!-- <img id="bg" src="../../assets/sunny.gif" /> -->
-        <div>
-            <input type="text" placeholder="City name">
-            <button>Get Weather</button>
+        <div class="column align-center">
+            <div class="content-wrapper row align-center">
+                <input name="location" id="location-input">
+                <div class="options-wrapper column">
+                </div>
+                </input>
+                <button>Get Weather</button>
+            </div>
         </div>
     </main>
 </body>

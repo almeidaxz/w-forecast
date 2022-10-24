@@ -27,3 +27,28 @@ body{
     background-color: rgba(0, 0, 0, 0.79);
     border-bottom: 0.2rem solid aliceblue;
 }
+
+#location-input{
+    width: 25rem;
+}
+
+.content-wrapper{
+    position: relative;
+}
+
+.options-wrapper{
+    width: 25rem;
+    background-color: aliceblue;
+    position: absolute;
+    top: 2rem;
+}
+
+.option{
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.option:hover{
+    opacity: 1;
+}
