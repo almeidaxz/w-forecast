@@ -28,6 +28,10 @@ body{
     border-bottom: 0.2rem solid aliceblue;
 }
 
+.input-wrapper{
+    margin-top: 4.5rem;
+}
+
 #location-input{
     width: 25rem;
 }
@@ -51,4 +55,18 @@ body{
 
 .option:hover{
     opacity: 1;
+}
+
+#weather-content-wrapper{
+    margin-top: 5rem;
+}
+
+.day-weather {
+    height: 25rem;
+    width: 60rem;
+    background-color: aliceblue;
+}
+
+.hidden {
+    display: none;
 }
