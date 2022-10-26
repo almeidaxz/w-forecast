@@ -3,6 +3,7 @@ import { googleKey } from "../secret.js";
 import { geolocationByAddress } from './services/APIs/geolocationUrl.js';
 import { handleGeolocationFetch } from "./services/handleGeolocationFetch.js";
 
+const metricText = document.querySelector('#metric-text');
 const metricState = document.querySelector('#metric-state');
 const selectedMetric = document.querySelector('#selected-metric');
 const locationInput = document.querySelector('#location-input');
@@ -18,7 +19,7 @@ let latitude, longitude;
         latitude = localLat;
         longitude = localLong;
 
-        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState);
+        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState, metricText);
         return;
     }
 
@@ -29,17 +30,17 @@ let latitude, longitude;
         localStorage.setItem('latitude', lat);
         localStorage.setItem('longitude', long);
 
-        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState);
+        handleGeolocationFetch(latitude, longitude, selectedMetric, metricState, metricText);
     });
 })();
 
 metricState.addEventListener('click', (e) => {
     if (!e.target.checked) {
-        changeToFahr(selectedMetric);
+        changeToFahr(selectedMetric, metricText);
         return;
     }
 
-    changeToCelc(selectedMetric);
+    changeToCelc(selectedMetric, metricText);
 });
 
 const getAddress = async (e) => {

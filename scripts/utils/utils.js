@@ -1,13 +1,15 @@
-export const changeToFahr = (selectedMetric) => {
+export const changeToFahr = (selectedMetric, metricText) => {
     selectedMetric.classList.add('fahr');
     selectedMetric.classList.remove('celc');
     selectedMetric.textContent = '°F';
+    metricText.textContent = 'Imperial';
 }
 
-export const changeToCelc = (selectedMetric) => {
+export const changeToCelc = (selectedMetric, metricText) => {
     selectedMetric.classList.remove('fahr');
     selectedMetric.classList.add('celc');
     selectedMetric.textContent = '°C';
+    metricText.textContent = 'Metric';
 }
 
 export const formatToCelc = (fahrValue) => {
