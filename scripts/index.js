@@ -11,7 +11,7 @@ const optionsWrapper = document.querySelector('.options-wrapper');
 
 let latitude, longitude;
 
-(async () => {
+(() => {
     const localLat = localStorage.getItem('latitude');
     const localLong = localStorage.getItem('longitude');
 
@@ -35,7 +35,9 @@ let latitude, longitude;
 })();
 
 metricState.addEventListener('click', (e) => {
-    changeTemperatureUnit(selectedMetric, metricText);
+    const existingResults = document.querySelectorAll('.daily-temperature');
+
+    changeTemperatureUnit(selectedMetric, metricText, existingResults);
 });
 
 const getAddress = async (e) => {

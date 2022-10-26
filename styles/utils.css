@@ -28,6 +28,10 @@
     align-items: center;
 }
 
+.align-start {
+    align-items: flex-start;
+}
+
 .gap-3 {
     gap: 0.3rem;
 }

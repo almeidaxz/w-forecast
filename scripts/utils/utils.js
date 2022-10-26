@@ -1,5 +1,5 @@
-export const changeTemperatureUnit = (selectedMetric, metricText) => {
-    if(metricText.innerHTML === 'Metric'){
+export const changeTemperatureUnit = (selectedMetric, metricText, existingResults) => {
+    if(metricText.textContent === 'Metric'){
         selectedMetric.classList.add('fahr');
         selectedMetric.classList.remove('celc');
         selectedMetric.textContent = '°F';
@@ -11,6 +11,16 @@ export const changeTemperatureUnit = (selectedMetric, metricText) => {
     selectedMetric.classList.add('celc');
     selectedMetric.textContent = '°C';
     metricText.textContent = 'Metric';
+
+    changeTemperatureUnitForExistingResults(existingResults, metricText);
+}
+
+const changeTemperatureUnitForExistingResults = (existingResults) => {
+    if(!existingResults.length) return;
+
+    existingResults.forEach((result) => {
+        
+    });
 }
 
 export const formatToCelc = (fahrValue) => {

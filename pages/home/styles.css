@@ -61,6 +61,10 @@ body {
     margin-top: 5rem;
 }
 
+.weather-content-wrapper{
+    padding: 0 3rem;
+}
+
 .todays-weather {
     height: 60rem;
     width: 40rem;
@@ -95,6 +99,38 @@ body {
 
 .daily-weather h1 {
     font-size: 2.8rem;
+}
+
+.bg-img-container {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.feelslike-img {
+    background-image: url('../../assets/feelslike.png');
+}
+
+.min-max-img {
+    background-image: url('../../assets/min-max.png');
+}
+
+.humidity-img {
+    background-image: url('../../assets/humidity.png');
+}
+
+.precipitation-img{
+    background-image: url('../../assets/rain.png');
+}
+
+.windspeed-img {
+    background-image: url('../../assets/wind.png');
+}
+
+.weather-info-wrapper{
+    width: 100%;
 }
 
 .hidden {
