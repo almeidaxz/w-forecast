@@ -1,4 +1,4 @@
-import { changeToCelc, changeToFahr } from "../scripts/utils/utils.js";
+import { changeTemperatureUnit } from "../scripts/utils/utils.js";
 import { googleKey } from "../secret.js";
 import { geolocationByAddress } from './services/APIs/geolocationUrl.js';
 import { handleGeolocationFetch } from "./services/handleGeolocationFetch.js";
@@ -35,12 +35,7 @@ let latitude, longitude;
 })();
 
 metricState.addEventListener('click', (e) => {
-    if (!e.target.checked) {
-        changeToFahr(selectedMetric, metricText);
-        return;
-    }
-
-    changeToCelc(selectedMetric, metricText);
+    changeTemperatureUnit(selectedMetric, metricText);
 });
 
 const getAddress = async (e) => {

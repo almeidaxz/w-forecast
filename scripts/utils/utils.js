@@ -1,11 +1,12 @@
-export const changeToFahr = (selectedMetric, metricText) => {
-    selectedMetric.classList.add('fahr');
-    selectedMetric.classList.remove('celc');
-    selectedMetric.textContent = '°F';
-    metricText.textContent = 'Imperial';
-}
+export const changeTemperatureUnit = (selectedMetric, metricText) => {
+    if(metricText.innerHTML === 'Metric'){
+        selectedMetric.classList.add('fahr');
+        selectedMetric.classList.remove('celc');
+        selectedMetric.textContent = '°F';
+        metricText.textContent = 'Imperial';
+        return;
+    }
 
-export const changeToCelc = (selectedMetric, metricText) => {
     selectedMetric.classList.remove('fahr');
     selectedMetric.classList.add('celc');
     selectedMetric.textContent = '°C';

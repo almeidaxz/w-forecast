@@ -4,13 +4,11 @@ import { formatToCelc, formatDayNumberToString, formatMilesToKMh } from "../util
 
 const weatherContentWrapper = document.querySelector('#weather-content-wrapper');
 
-export const handleWeatherFetch = async (latitude, longitude, temperatureMetric) => {
+export const handleWeatherFetch = async (latitude, longitude, metricText) => {
     const response = await fetch(`${weatherUrl}/${latitude},${longitude}/next5days?key=${weatherKey}`);
     const weathers = await response.json();
 
     if (!weathers.days.length) return;
-
-    console.log(weathers);
 
     weathers.days.map((day) => {
         const dailyWeatherWrapper = document.createElement('div');
@@ -31,13 +29,13 @@ export const handleWeatherFetch = async (latitude, longitude, temperatureMetric)
         precipitationWrapper.textContent = `Precipitation Probability ${day.precipprob.toFixed(0)}%`;
         windSpeedWrapper.textContent = `Wind Speed ${day.windspeed}mi/h`;
 
-
+        currentDayTemperature.classList.add('daily-temperature')
         dailyWeatherWrapper.classList.add('daily-weather', 'column', 'align-center', 'space-around');
         dayAndTemperatureWrapper.classList.add('column-reverse', 'align-center', 'gap-5');
         
         currentDayTemperature.innerHTML = `${day.temp.toFixed(0)} <sup>&deg;F</sup>`;
 
-        if(temperatureMetric === '°C') {
+        if(metricText.textContent === 'Metric') {
             currentDayTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;C</sup>`;
             feelsLikeWrapper.innerHTML = `Feels Like ${formatToCelc(day.feelslike)} <sup>&deg;C</sup>`;
             minAndMaxWrapper.innerHTML = `Min/Max ${formatToCelc(day.tempmax)}<sup>&deg;C</sup>/${formatToCelc(day.tempmin)}<sup>&deg;C</sup>`;
