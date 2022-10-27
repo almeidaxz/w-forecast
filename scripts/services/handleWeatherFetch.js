@@ -4,7 +4,7 @@ import { formatToCelc, formatDayNumberToString, formatMilesToKMh } from "../util
 
 const weatherContentWrapper = document.querySelector('#weather-results-container');
 
-export const handleWeatherFetch = async (latitude, longitude, metricText) => {
+export const handleWeatherFetch = async (latitude, longitude, metricText, location) => {
     const response = await fetch(`${weatherUrl}/${latitude},${longitude}/next5days?key=${weatherKey}`);
     const weathers = await response.json();
 
@@ -14,11 +14,18 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
     weathers.days.map((day) => {
         const dailyWeatherWrapper = document.createElement('div');
         const dayAndTemperatureWrapper = document.createElement('div');
+        const weatherConditionBgImg = document.createElement('div');
         const currentDayTemperature = document.createElement('h1');
         const weekDay = document.createElement('h2');
         const conditions = document.createElement('span');
+        const locationAddress = document.createElement('div');
+        const locationPointIcon = document.createElement('div');
         const weatherInformationWrapper = document.createElement('div');
-        const weatherConditionBgImg = document.createElement('div');
+
+        locationAddress.textContent = location;
+        locationAddress.classList.add('relative');
+        locationPointIcon.classList.add('absolute', 'location-point-icon');
+        locationAddress.append(locationPointIcon);
 
         weatherInformationWrapper.classList.add('weather-info-wrapper', 'column', 'gap-15');
 
@@ -54,9 +61,9 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
 
         feelslikeImg.classList.add('feelslike-img', 'info-img-bg');
         feelslikeImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
-        feelsLikeWrapper.classList.add('weather-info-wrapper', 'row', 'space-btw', 'align-start');
+        feelsLikeWrapper.classList.add('row', 'space-btw', 'align-start');
         feelslikeText.textContent = 'Feels Like';
-        feelslikeResult.innerHTML = `${day.temp}<sup>&deg;F</sup>`;
+        feelslikeResult.innerHTML = `${day.temp.toFixed(0)}<sup>&deg;F</sup>`;
         feelslikeImgAndTextWrapper.append(feelslikeImg, feelslikeText);
         feelsLikeWrapper.append(feelslikeImgAndTextWrapper, feelslikeResult);
 
@@ -64,7 +71,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         minAndMaxImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         minAndMaxWrapper.classList.add('row', 'space-btw', 'align-start');
         minAndMaxText.textContent = 'Min/Max';
-        minAndMaxResult.innerHTML = `${day.tempmax}<sup>&deg;F</sup>/${day.tempmin}<sup>&deg;F</sup>`;
+        minAndMaxResult.innerHTML = `${day.tempmax.toFixed(0)}<sup>&deg;F</sup>/${day.tempmin.toFixed(0)}<sup>&deg;F</sup>`;
         minAndMaxImgAndTextWrapper.append(minAndMaxImg, minAndMaxText)
         minAndMaxWrapper.append(minAndMaxImgAndTextWrapper, minAndMaxResult);
 
@@ -75,7 +82,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         humidityResult.textContent = `${day.humidity.toFixed(0)}%`;
         humidityImgAndTextWrapper.append(humidityImg, humidityText);
         humidityWrapper.append(humidityImgAndTextWrapper, humidityResult);
-        
+
         precipitationImg.classList.add('precipitation-img', 'info-img-bg');
         precipitationImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         precipitationWrapper.classList.add('row', 'space-btw', 'align-center');
@@ -100,7 +107,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
 
         currentDayTemperature.innerHTML = `${day.temp.toFixed(0)} <sup>&deg;F</sup>`;
 
-        if(metricText.textContent === 'Metric') {
+        if (metricText.textContent === 'Metric') {
             currentDayTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;C</sup>`;
             feelslikeResult.innerHTML = `${formatToCelc(day.feelslike)} <sup>&deg;C</sup>`;
             minAndMaxResult.innerHTML = `${formatToCelc(day.tempmax)}<sup>&deg;C</sup>/${formatToCelc(day.tempmin)}<sup>&deg;C</sup>`;
@@ -108,25 +115,25 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         }
 
         weekDay.textContent = formatDayNumberToString(day.datetime);
+        conditions.classList.add('daily-condition', 'daily-font-thin');
         conditions.textContent = day.conditions;
 
 
         if (day === weathers.days[0]) {
             dailyWeatherWrapper.classList.remove('daily-weather');
             weatherConditionBgImg.classList.remove('daily-condition-img', 'size-10');
-            
+
             dailyWeatherWrapper.classList.add('todays-weather');
             weatherConditionBgImg.classList.add('todays-condition-img', 'size-15');
-            dayAndTemperatureWrapper.classList.add('column', 'align-center', 'gap-5');
+            dayAndTemperatureWrapper.classList.add('align-center', 'gap-5');
             currentDayTemperature.classList.add('todays-temperature');
             weekDay.classList.add('todays-weekday');
             conditions.classList.add('todays-condition');
         }
-        
-                
+
         weatherInformationWrapper.append(feelsLikeWrapper, minAndMaxWrapper, humidityWrapper, precipitationWrapper, windSpeedWrapper);
         dayAndTemperatureWrapper.append(conditions, weekDay, currentDayTemperature);
-        dailyWeatherWrapper.append(dayAndTemperatureWrapper, weatherInformationWrapper);
+        dailyWeatherWrapper.append(dayAndTemperatureWrapper, locationAddress, weatherInformationWrapper);
         weatherContentWrapper.append(dailyWeatherWrapper);
     });
 }

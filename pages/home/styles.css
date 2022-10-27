@@ -64,14 +64,22 @@ body {
 .todays-weather {
     height: 60rem;
     width: 40rem;
+
 }
 
 .todays-weather span {
     font-size: 1.8rem;
+    font-weight: 600;
 }
 
+.todays-weather .weather-info-wrapper {
+    margin-bottom: 30px;
+    gap: 2rem;
+}
+
+
 .todays-weather sup {
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .weather-condition-img {
@@ -92,11 +100,12 @@ body {
 }
 
 .todays-condition-img {
-    top: -15rem;
+    top: -13rem;
 }
 
 .todays-temperature {
     font-size: 4.2rem;
+    margin-top: 4rem;
 }
 
 .todays-weekday {
@@ -113,6 +122,23 @@ body {
     padding-bottom: 3rem;
 }
 
+.daily-weather span {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+
+.location-point-icon{
+    background-image: url('../../assets/point-icon-red.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -18rem;
+}
+
 .current-weather-bg-img {
     background-position: top;
     background-repeat: no-repeat;
@@ -122,11 +148,11 @@ body {
 
 .daily-weather h1 {
     font-size: 2.8rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .daily-weather sup {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .info-img-bg {
@@ -159,4 +185,8 @@ body {
 
 .weather-info-wrapper {
     width: 100%;
+}
+
+.relative .daily-font-thin{
+    font-weight: 400;
 }
