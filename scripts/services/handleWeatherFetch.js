@@ -2,7 +2,7 @@ import { weatherKey } from "../../secret.js";
 import weatherUrl from "./APIs/weatherUrl.js";
 import { formatToCelc, formatDayNumberToString, formatMilesToKMh } from "../utils/utils.js";
 
-const weatherContentWrapper = document.querySelector('#weather-content-wrapper');
+const weatherContentWrapper = document.querySelector('#weather-results-container');
 
 export const handleWeatherFetch = async (latitude, longitude, metricText) => {
     const response = await fetch(`${weatherUrl}/${latitude},${longitude}/next5days?key=${weatherKey}`);
@@ -10,6 +10,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
 
     if (!weathers.days.length) return;
 
+    console.log(weathers);
     weathers.days.map((day) => {
         const dailyWeatherWrapper = document.createElement('div');
         const dayAndTemperatureWrapper = document.createElement('div');
@@ -17,8 +18,9 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         const weekDay = document.createElement('h2');
         const conditions = document.createElement('span');
         const weatherInformationWrapper = document.createElement('div');
+        const weatherConditionBgImg = document.createElement('div');
 
-        weatherInformationWrapper.classList.add('weather-info-wrapper', 'column', 'gap-15')
+        weatherInformationWrapper.classList.add('weather-info-wrapper', 'column', 'gap-15');
 
         const feelsLikeWrapper = document.createElement('div');
         const feelslikeImgAndTextWrapper = document.createElement('div');
@@ -50,7 +52,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         const windSpeedText = document.createElement('span');
         const windSpeedResult = document.createElement('span');
 
-        feelslikeImg.classList.add('feelslike-img', 'bg-img-container');
+        feelslikeImg.classList.add('feelslike-img', 'info-img-bg');
         feelslikeImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         feelsLikeWrapper.classList.add('weather-info-wrapper', 'row', 'space-btw', 'align-start');
         feelslikeText.textContent = 'Feels Like';
@@ -58,7 +60,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         feelslikeImgAndTextWrapper.append(feelslikeImg, feelslikeText);
         feelsLikeWrapper.append(feelslikeImgAndTextWrapper, feelslikeResult);
 
-        minAndMaxImg.classList.add('min-max-img', 'bg-img-container');
+        minAndMaxImg.classList.add('min-max-img', 'info-img-bg');
         minAndMaxImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         minAndMaxWrapper.classList.add('row', 'space-btw', 'align-start');
         minAndMaxText.textContent = 'Min/Max';
@@ -66,7 +68,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         minAndMaxImgAndTextWrapper.append(minAndMaxImg, minAndMaxText)
         minAndMaxWrapper.append(minAndMaxImgAndTextWrapper, minAndMaxResult);
 
-        humidityImg.classList.add('humidity-img', 'bg-img-container');
+        humidityImg.classList.add('humidity-img', 'info-img-bg');
         humidityImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         humidityWrapper.classList.add('row', 'space-btw', 'align-center');
         humidityText.textContent = 'Humidity';
@@ -74,7 +76,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         humidityImgAndTextWrapper.append(humidityImg, humidityText);
         humidityWrapper.append(humidityImgAndTextWrapper, humidityResult);
         
-        precipitationImg.classList.add('precipitation-img', 'bg-img-container');
+        precipitationImg.classList.add('precipitation-img', 'info-img-bg');
         precipitationImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         precipitationWrapper.classList.add('row', 'space-btw', 'align-center');
         precipitationText.textContent = 'Precipitation Chance';
@@ -82,7 +84,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         precipitationImgAndTextWrapper.append(precipitationImg, precipitationText);
         precipitationWrapper.append(precipitationImgAndTextWrapper, precipitationResult);
 
-        windSpeedImg.classList.add('windspeed-img', 'bg-img-container');
+        windSpeedImg.classList.add('windspeed-img', 'info-img-bg');
         windSpeedImgAndTextWrapper.classList.add('row', 'space-btw', 'align-center', 'gap-8');
         windSpeedWrapper.classList.add('row', 'space-btw', 'align-center');
         windSpeedText.textContent = 'Wind Speed';
@@ -91,8 +93,11 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
         windSpeedWrapper.append(windSpeedImgAndTextWrapper, windSpeedResult);
 
         dailyWeatherWrapper.classList.add('daily-weather', 'weather-content-wrapper', 'column', 'align-center', 'space-around');
-        dayAndTemperatureWrapper.classList.add('column-reverse', 'align-center', 'gap-5');
-        
+        dayAndTemperatureWrapper.classList.add('relative', 'column-reverse', 'align-center', 'justify-center', 'gap-5');
+        weatherConditionBgImg.style.backgroundImage = `url('../../assets/weatherIcons/${day.icon}.svg`;
+        weatherConditionBgImg.classList.add('daily-condition-img', 'weather-condition-img', 'size-10', 'absolute');
+        dayAndTemperatureWrapper.append(weatherConditionBgImg);
+
         currentDayTemperature.innerHTML = `${day.temp.toFixed(0)} <sup>&deg;F</sup>`;
 
         if(metricText.textContent === 'Metric') {
@@ -108,8 +113,10 @@ export const handleWeatherFetch = async (latitude, longitude, metricText) => {
 
         if (day === weathers.days[0]) {
             dailyWeatherWrapper.classList.remove('daily-weather');
+            weatherConditionBgImg.classList.remove('daily-condition-img', 'size-10');
+            
             dailyWeatherWrapper.classList.add('todays-weather');
-
+            weatherConditionBgImg.classList.add('todays-condition-img', 'size-15');
             dayAndTemperatureWrapper.classList.add('column', 'align-center', 'gap-5');
             currentDayTemperature.classList.add('todays-temperature');
             weekDay.classList.add('todays-weekday');

@@ -55,3 +55,25 @@
 .width-90{
     width: 9rem;
 }
+
+.size-10 {
+    height: 10rem;
+    width: 10rem;
+}
+
+.size-15 {
+    height: 15rem;
+    width: 15rem;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
