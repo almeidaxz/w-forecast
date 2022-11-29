@@ -2,14 +2,17 @@ import { changeTemperatureUnit } from "../scripts/utils/utils.js";
 import { googleKey } from "../secret.js";
 import { geolocationByAddress } from './services/APIs/geolocationUrl.js';
 import { handleGeolocationFetch } from "./services/handleGeolocationFetch.js";
+import { handleWeatherFetch } from "./services/handleWeatherFetch.js";
 
 const metricText = document.querySelector('#metric-text');
 const metricState = document.querySelector('#metric-state');
 const selectedMetric = document.querySelector('#selected-metric');
 const locationInput = document.querySelector('#location-input');
 const optionsWrapper = document.querySelector('.options-wrapper');
+const searchLocation = document.querySelector('#search-location');
 
 let latitude, longitude;
+let addressLocation = '';
 
 (() => {
     const localLat = localStorage.getItem('latitude');
@@ -50,11 +53,13 @@ const getAddress = async (e) => {
     const currentValue = e.target.value;
     const response = await fetch(`${geolocationByAddress}${currentValue}&key=${googleKey}`);
     const searchByAddress = await response.json();
-
     if (!searchByAddress.results.length) return;
 
-    const option = document.querySelector('.option');
+    latitude = searchByAddress.results[0].geometry.location.lat;
+    longitude = searchByAddress.results[0].geometry.location.lng;
+    addressLocation = searchByAddress.results[0].formatted_address;
 
+    const option = document.querySelector('.option');
     if (!option) {
         const option = document.createElement('span');
         option.textContent = searchByAddress.results[0].formatted_address;
@@ -73,3 +78,19 @@ const getAddress = async (e) => {
 const handleFetchAddress = _.debounce(getAddress, 500);
 
 locationInput.addEventListener('keydown', (e) => handleFetchAddress(e));
+
+searchLocation.addEventListener('click', (e) => {
+    if (addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA')) {
+        changeTemperatureUnit(selectedMetric, metricText);
+        metricState.checked = false;
+        handleWeatherFetch(latitude, longitude, '', addressLocation);
+
+        localStorage.setItem('latitude', latitude);
+        localStorage.setItem('longitude', longitude);
+        return;
+    }
+    
+    handleWeatherFetch(latitude, longitude, 'Metric', addressLocation);
+    localStorage.setItem('latitude', latitude);
+    localStorage.setItem('longitude', longitude);
+});

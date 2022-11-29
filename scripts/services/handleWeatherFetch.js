@@ -7,11 +7,15 @@ const weatherContentWrapper = document.querySelector('#weather-results-container
 export const handleWeatherFetch = async (latitude, longitude, metricText, location) => {
     const response = await fetch(`${weatherUrl}/${latitude},${longitude}/next5days?key=${weatherKey}`);
     const weathers = await response.json();
-
     if (!weathers.days.length) return;
 
-    console.log(weathers);
+    const localLat = localStorage.getItem('latitude');
+    const localLong = localStorage.getItem('longitude');
+
     weathers.days.map((day) => {
+        if (day === weathers.days.at(-1)) return;
+
+
         const dailyWeatherWrapper = document.createElement('div');
         const dayAndTemperatureWrapper = document.createElement('div');
         const weatherConditionBgImg = document.createElement('div');
@@ -21,6 +25,18 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
         const locationAddress = document.createElement('div');
         const locationPointIcon = document.createElement('div');
         const weatherInformationWrapper = document.createElement('div');
+
+        if (localLat || localLong) {
+            dailyWeatherWrapper.remove();
+            dayAndTemperatureWrapper.remove();
+            weatherConditionBgImg.remove();
+            currentDayTemperature.remove();
+            weekDay.remove();
+            conditions.remove();
+            locationAddress.remove();
+            locationPointIcon.remove();
+            weatherInformationWrapper.remove();
+        }
 
         locationAddress.textContent = location;
         locationAddress.classList.add('relative');
