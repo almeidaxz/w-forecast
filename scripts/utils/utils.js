@@ -1,18 +1,16 @@
-export const changeTemperatureUnit = (selectedMetric, metricText, existingResults) => {
-    if(metricText.textContent === 'Metric'){
-        selectedMetric.classList.add('fahr');
+export const changeTemperatureUnit = (selectedMetric, metricText, addressLocation) => {
+    if (metricText.textContent === 'Metric' && (addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA'))) {
         selectedMetric.classList.remove('celc');
+        selectedMetric.classList.add('fahr');
         selectedMetric.textContent = '°F';
-        metricText.textContent = 'Imperial';
-        return;
+        return metricText.textContent = 'Imperial';
     }
-
-    selectedMetric.classList.remove('fahr');
-    selectedMetric.classList.add('celc');
-    selectedMetric.textContent = '°C';
-    metricText.textContent = 'Metric';
-
-    changeTemperatureUnitForExistingResults(existingResults, metricText);
+    if (metricText.textContent === 'Imperial' && !(addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA'))) {
+        selectedMetric.classList.remove('fahr');
+        selectedMetric.classList.add('celc');
+        selectedMetric.textContent = '°C';
+        metricText.textContent = 'Metric';
+    }
 }
 
 export const formatToCelc = (fahrValue) => {

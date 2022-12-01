@@ -74,15 +74,18 @@ locationInput.addEventListener('keydown', (e) => handleFetchAddress(e));
 
 searchLocation.addEventListener('click', (e) => {
     if (addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA')) {
-        changeTemperatureUnit(selectedMetric, metricText);
-        metricState.checked = false;
+
+        changeTemperatureUnit(selectedMetric, metricText, addressLocation);
         localStorage.setItem('latitude', latitude);
         localStorage.setItem('longitude', longitude);
-        handleWeatherFetch(latitude, longitude, metricText.textContent, addressLocation);
+        metricState.checked = false;
+        handleWeatherFetch(latitude, longitude, metricText, addressLocation);
         return;
     }
-
+    
+    changeTemperatureUnit(selectedMetric, metricText, addressLocation);
     localStorage.setItem('latitude', latitude);
     localStorage.setItem('longitude', longitude);
-    handleWeatherFetch(latitude, longitude, metricText.textContent, addressLocation);
+    metricState.checked = true;
+    handleWeatherFetch(latitude, longitude, metricText, addressLocation);
 });

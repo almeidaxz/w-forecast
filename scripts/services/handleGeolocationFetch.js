@@ -12,7 +12,7 @@ export const handleGeolocationFetch = async (latitude, longitude, selectedMetric
     const formatedAdress = [removedUselessData, splitedAddress.splice(1)].join().replaceAll(',', ', ');
 
     if (address.plus_code.compound_code.includes('USA') || address.plus_code.compound_code.includes('US') || address.plus_code.compound_code.includes('EUA')) {
-        changeTemperatureUnit(selectedMetric, metricText);
+        changeTemperatureUnit(selectedMetric, metricText, address.plus_code.compound_code);
         metricState.checked = false;
     }
 

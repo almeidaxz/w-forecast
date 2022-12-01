@@ -16,8 +16,6 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
         weatherContentWrapper.firstChild.remove()
     }
 
-    console.log(metricText.textContent);
-
     weathers.days.map((day) => {
         if (day === weathers.days.at(-1)) return;
 
