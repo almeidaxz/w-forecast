@@ -29,6 +29,7 @@ export const changeTemperatureInput = (checked, selectedMetric, metricText) => {
 
 export const formatToCelc = (fahrValue) => {
     const celcValue = (fahrValue - 32) / 1.8;
+    if(celcValue.toFixed(0) === '-0') return 0;
     return celcValue.toFixed(0);
 }
 
