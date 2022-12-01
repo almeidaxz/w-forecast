@@ -44,7 +44,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
 
         locationAddress.textContent = location;
         locationAddress.classList.add('relative');
-        locationPointIcon.classList.add('absolute', 'location-point-icon');
+        locationPointIcon.classList.add('location-point-icon');
         locationAddress.append(locationPointIcon);
 
         weatherInformationWrapper.classList.add('weather-info-wrapper', 'column', 'gap-15');

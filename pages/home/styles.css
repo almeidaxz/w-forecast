@@ -95,7 +95,7 @@ body {
 .weather-content-wrapper {
     padding: 0 3rem;
     border-radius: 8px;
-    box-shadow: 7px 10px 12px -1px rgba(153,153,153,1);
+    box-shadow: 7px 10px 12px -1px rgba(153, 153, 153, 1);
     background-color: aliceblue;
 }
 
@@ -128,15 +128,17 @@ body {
 }
 
 
-.location-point-icon{
+.location-point-icon {
+    width: 13px;
     background-image: url('../../assets/point-icon-red.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    position: absolute;
+    left: -20px;
     top: 0;
     right: 0;
     bottom: 0;
-    left: -18rem;
 }
 
 .current-weather-bg-img {
@@ -187,6 +189,6 @@ body {
     width: 100%;
 }
 
-.relative .daily-font-thin{
+.relative .daily-font-thin {
     font-weight: 400;
 }

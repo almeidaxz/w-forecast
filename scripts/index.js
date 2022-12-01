@@ -77,6 +77,7 @@ searchLocation.addEventListener('click', (e) => {
         changeTemperatureUnit(selectedMetric, metricText, addressLocation);
         localStorage.setItem('latitude', latitude);
         localStorage.setItem('longitude', longitude);
+        localStorage.setItem('location', addressLocation);
         metricState.checked = false;
         handleWeatherFetch(latitude, longitude, metricText, addressLocation);
         return;
@@ -85,6 +86,7 @@ searchLocation.addEventListener('click', (e) => {
     changeTemperatureUnit(selectedMetric, metricText, addressLocation);
     localStorage.setItem('latitude', latitude);
     localStorage.setItem('longitude', longitude);
+    localStorage.setItem('location', addressLocation);
     metricState.checked = true;
     handleWeatherFetch(latitude, longitude, metricText, addressLocation);
 });
