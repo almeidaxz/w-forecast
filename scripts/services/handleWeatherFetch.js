@@ -131,6 +131,7 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
             currentDayTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;C</sup>`;
             feelslikeResult.innerHTML = `${formatToCelc(day.feelslike)} <sup>&deg;C</sup>`;
             minAndMaxResult.innerHTML = `${formatToCelc(day.tempmax)}<sup>&deg;C</sup>/${formatToCelc(day.tempmin)}<sup>&deg;C</sup>`;
+            windSpeedResult.textContent = `${formatMilesToKMh(day.windspeed)}km/h`;
         }
 
         weekDay.textContent = formatDayNumberToString(day.datetime);
