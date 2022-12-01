@@ -37,10 +37,6 @@ let addressLocation = '';
     });
 })();
 
-metricState.addEventListener('click', (e) => {
-    changeTemperatureInput(metricState.checked, selectedMetric, metricText);
-});
-
 const getAddress = async (e) => {
     if (e.target.value === '' || e.target.value.trim() === '') {
         optionsWrapper.classList.add('hidden');
@@ -92,4 +88,11 @@ searchLocation.addEventListener('click', (e) => {
     localStorage.setItem('longitude', longitude);
     metricState.checked = true;
     handleWeatherFetch(latitude, longitude, metricText, addressLocation);
+});
+
+metricState.addEventListener('click', (e) => {
+    changeTemperatureInput(metricState.checked, selectedMetric, metricText);
+    setTimeout(() => {
+        handleWeatherFetch(latitude, longitude, metricText, addressLocation);
+    }, 700);
 });

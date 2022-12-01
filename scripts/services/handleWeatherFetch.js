@@ -16,6 +16,8 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
         weatherContentWrapper.firstChild.remove()
     }
 
+    console.log(location);
+
     weathers.days.map((day) => {
         if (day === weathers.days.at(-1)) return;
         if (window.innerWidth < 1440 && ((day === weathers.days.at(-2)) || (day === weathers.days.at(-2)))) return;
@@ -131,7 +133,6 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
             currentDayTemperature.innerHTML = `${formatToCelc(day.temp)} <sup>&deg;C</sup>`;
             feelslikeResult.innerHTML = `${formatToCelc(day.feelslike)} <sup>&deg;C</sup>`;
             minAndMaxResult.innerHTML = `${formatToCelc(day.tempmax)}<sup>&deg;C</sup>/${formatToCelc(day.tempmin)}<sup>&deg;C</sup>`;
-            humidityResult.textContent = `${formatMilesToKMh(day.windspeed)}km/h`;
         }
 
         weekDay.textContent = formatDayNumberToString(day.datetime);
