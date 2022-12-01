@@ -15,6 +15,7 @@ export const handleGeolocationFetch = async (latitude, longitude, selectedMetric
         changeTemperatureUnit(selectedMetric, metricText, address.plus_code.compound_code);
         metricState.checked = false;
     }
-
+    
+    localStorage.setItem('location', formatedAdress);
     handleWeatherFetch(latitude, longitude, metricText, formatedAdress);
 }

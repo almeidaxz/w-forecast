@@ -12,7 +12,7 @@ const optionsWrapper = document.querySelector('.options-wrapper');
 const searchLocation = document.querySelector('#search-location');
 
 let latitude, longitude;
-let addressLocation = '';
+let addressLocation = localStorage.getItem('location');
 
 (() => {
     const localLat = localStorage.getItem('latitude');
@@ -74,7 +74,6 @@ locationInput.addEventListener('keydown', (e) => handleFetchAddress(e));
 
 searchLocation.addEventListener('click', (e) => {
     if (addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA')) {
-
         changeTemperatureUnit(selectedMetric, metricText, addressLocation);
         localStorage.setItem('latitude', latitude);
         localStorage.setItem('longitude', longitude);
