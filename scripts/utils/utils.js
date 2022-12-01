@@ -13,6 +13,20 @@ export const changeTemperatureUnit = (selectedMetric, metricText, addressLocatio
     }
 }
 
+export const changeTemperatureInput = (checked, selectedMetric, metricText) => {
+    if (checked) {
+        selectedMetric.classList.remove('fahr');
+        selectedMetric.classList.add('celc');
+        selectedMetric.textContent = '°C';
+        metricText.textContent = 'Metric';
+    } else {
+        selectedMetric.classList.remove('celc');
+        selectedMetric.classList.add('fahr');
+        selectedMetric.textContent = '°F';
+        metricText.textContent = 'Imperial';
+    }
+}
+
 export const formatToCelc = (fahrValue) => {
     const celcValue = (fahrValue - 32) / 1.8;
     return celcValue.toFixed(0);

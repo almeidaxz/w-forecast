@@ -1,4 +1,4 @@
-import { changeTemperatureUnit } from "../scripts/utils/utils.js";
+import { changeTemperatureInput, changeTemperatureUnit } from "../scripts/utils/utils.js";
 import { googleKey } from "../secret.js";
 import { geolocationByAddress } from './services/APIs/geolocationUrl.js';
 import { handleGeolocationFetch } from "./services/handleGeolocationFetch.js";
@@ -36,6 +36,10 @@ let addressLocation = '';
         handleGeolocationFetch(latitude, longitude, selectedMetric, metricState, metricText);
     });
 })();
+
+metricState.addEventListener('click', (e) => {
+    changeTemperatureInput(metricState.checked, selectedMetric, metricText);
+});
 
 const getAddress = async (e) => {
     if (e.target.value === '' || e.target.value.trim() === '') {
@@ -82,7 +86,7 @@ searchLocation.addEventListener('click', (e) => {
         handleWeatherFetch(latitude, longitude, metricText, addressLocation);
         return;
     }
-    
+
     changeTemperatureUnit(selectedMetric, metricText, addressLocation);
     localStorage.setItem('latitude', latitude);
     localStorage.setItem('longitude', longitude);
