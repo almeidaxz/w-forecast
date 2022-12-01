@@ -15,14 +15,6 @@ export const changeTemperatureUnit = (selectedMetric, metricText, existingResult
     changeTemperatureUnitForExistingResults(existingResults, metricText);
 }
 
-const changeTemperatureUnitForExistingResults = (existingResults) => {
-    if(!existingResults.length) return;
-
-    existingResults.forEach((result) => {
-        
-    });
-}
-
 export const formatToCelc = (fahrValue) => {
     const celcValue = (fahrValue - 32) / 1.8;
     return celcValue.toFixed(0);

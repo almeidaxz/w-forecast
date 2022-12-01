@@ -37,12 +37,6 @@ let addressLocation = '';
     });
 })();
 
-metricState.addEventListener('click', (e) => {
-    const existingResults = document.querySelectorAll('.daily-temperature');
-
-    changeTemperatureUnit(selectedMetric, metricText, existingResults);
-});
-
 const getAddress = async (e) => {
     if (e.target.value === '' || e.target.value.trim() === '') {
         optionsWrapper.classList.add('hidden');
@@ -76,21 +70,19 @@ const getAddress = async (e) => {
     option.textContent = searchByAddress.results[0].formatted_address;
 }
 const handleFetchAddress = _.debounce(getAddress, 500);
-
 locationInput.addEventListener('keydown', (e) => handleFetchAddress(e));
 
 searchLocation.addEventListener('click', (e) => {
     if (addressLocation.includes('USA') || addressLocation.includes('US') || addressLocation.includes('EUA')) {
         changeTemperatureUnit(selectedMetric, metricText);
         metricState.checked = false;
-        handleWeatherFetch(latitude, longitude, '', addressLocation);
-
         localStorage.setItem('latitude', latitude);
         localStorage.setItem('longitude', longitude);
+        handleWeatherFetch(latitude, longitude, metricText.textContent, addressLocation);
         return;
     }
-    
-    handleWeatherFetch(latitude, longitude, 'Metric', addressLocation);
+
     localStorage.setItem('latitude', latitude);
     localStorage.setItem('longitude', longitude);
+    handleWeatherFetch(latitude, longitude, metricText.textContent, addressLocation);
 });

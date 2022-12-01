@@ -12,9 +12,14 @@ export const handleWeatherFetch = async (latitude, longitude, metricText, locati
     const localLat = localStorage.getItem('latitude');
     const localLong = localStorage.getItem('longitude');
 
+    while (weatherContentWrapper.firstChild) {
+        weatherContentWrapper.firstChild.remove()
+    }
+
+    console.log(metricText.textContent);
+
     weathers.days.map((day) => {
         if (day === weathers.days.at(-1)) return;
-
 
         const dailyWeatherWrapper = document.createElement('div');
         const dayAndTemperatureWrapper = document.createElement('div');
